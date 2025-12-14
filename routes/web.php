@@ -5,6 +5,9 @@ use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 
+Route::post('/courses/{id}/enroll', [CourseController::class, 'enroll'])
+    ->middleware('auth')
+    ->name('courses.enroll');
 
 
 Route::get('/courses/{id}', [CourseController::class, 'show'])

@@ -24,5 +24,18 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         return view('courses.show', compact('course'));
     }
+    use Illuminate\Support\Facades\Auth;
+
+    public function enroll($id)
+    {
+        $course = Course::findOrFail($id);
+
+        Auth::user()->courses()->syncWithoutDetaching([
+            $course->id => ['progress' => 0]
+        ]);
+
+        return redirect()->back()->with('success', 'Đăng ký khóa học thành công');
+    }
+
 
 }
