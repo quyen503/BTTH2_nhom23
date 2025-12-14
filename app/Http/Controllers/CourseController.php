@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -24,7 +25,6 @@ class CourseController extends Controller
         $course = Course::findOrFail($id);
         return view('courses.show', compact('course'));
     }
-    use Illuminate\Support\Facades\Auth;
 
     public function enroll($id)
     {
@@ -37,5 +37,10 @@ class CourseController extends Controller
         return redirect()->back()->with('success', 'Đăng ký khóa học thành công');
     }
 
+    public function myCourses()
+    {
+        $courses = auth()->user()->courses;
+        return view('courses.my', compact('courses'));
+    }
 
 }
