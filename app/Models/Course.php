@@ -14,4 +14,11 @@ class Course extends Model
         'description',
         'price',
     ];
+    public function users()
+    {
+        return $this->belongsToMany(User::class)
+                    ->withPivot('progress')
+                    ->withTimestamps();
+    }
+
 }
