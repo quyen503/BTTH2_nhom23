@@ -9,11 +9,14 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->tinyInteger('role')->default(0); // 0=student, 1=instructor, 2=admin
-        });
+        if (!Schema::hasColumn('users', 'role')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->tinyInteger('role')->default(0);
+            });
+        }
     }
 
 
