@@ -1,17 +1,27 @@
-<h2>Danh sách khóa học</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Danh sách khóa học</title>
+</head>
+<body>
 
-<form method="GET">
-    <input name="search" placeholder="Tìm khóa học">
-    <button>Tìm</button>
-</form>
+<h1>Danh sách khóa học</h1>
 
-<hr>
+@foreach ($courses as $course)
+    <div style="border:1px solid #ccc; padding:10px; margin:10px">
+        <h3>{{ $course->name }}</h3>
 
-@foreach($courses as $course)
-    <div>
-        <h3>{{ $course->title }}</h3>
-        <p>Giá: {{ $course->price }} VND</p>
+        <p>{{ $course->description }}</p>
+
+        <strong>Giá: {{ number_format($course->price) }} VND</strong>
+        <br><br>
+
+        <a href="{{ route('courses.show', $course->id) }}">
+            Xem chi tiết
+        </a>
     </div>
 @endforeach
 
-{{ $courses->links() }}
+</body>
+</html>

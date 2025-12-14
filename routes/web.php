@@ -5,6 +5,11 @@ use App\Http\Controllers\AdminUserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CourseController;
 
+
+
+Route::get('/courses/{id}', [CourseController::class, 'show'])
+    ->name('courses.show');
+
 Route::get('/courses', [CourseController::class, 'index']);
 
 Route::get('/', function () {

@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-    Schema::create('courses', function (Blueprint $table) {
+    Schema::create('course_user', function (Blueprint $table) {
         $table->id();
-        $table->string('name');                 // tên khóa học
-        $table->text('description')->nullable(); // mô tả
-        $table->integer('price')->default(0);   // giá
+        $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+        $table->foreignId('course_id')->constrained()->cascadeOnDelete();
+        $table->integer('progress')->default(0); // tiến độ %
         $table->timestamps();
     });
+
     }
 
     /**
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('courses');
+        Schema::dropIfExists('course_user');
     }
 };
